@@ -1,0 +1,42 @@
+{
+  "name": "jabroni-web-client",
+  "version": "0.1.0",
+  "scripts": {
+    "build": "bsb -make-world && npm run webpack-cli",
+    "clean": "bsb -clean-world",
+    "server": "rebar3 shell",
+    "test": "rebar3 dialyzer && rebar3 eunit",
+    "webpack-cli": "webpack-cli",
+    "wabby": "wabby"
+  },
+  "keywords": [
+    "BuckleScript",
+    "ReasonReact",
+    "reason-react"
+  ],
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "@glennsl/bs-json": "^5.0.2",
+    "@ryb73/bs-websockets": "^0.1.2",
+    "autoprefixer": "^9.8.6",
+    "bs-fetch": "^0.6.2",
+    "canvas2svg": "^1.0.16",
+    "css-loader": "^4.3.0",
+    "express": "^4.17.1",
+    "postcss": "^7.0.32",
+    "postcss-loader": "^4.0.1",
+    "react": "^16.8.1",
+    "react-dom": "^16.8.1",
+    "reason-react": "^0.9.1",
+    "style-loader": "^1.2.1",
+    "tailwindcss": "^1.8.7",
+    "webpack": "^4.44.1"
+  },
+  "devDependencies": {
+    "bs-platform": "^8.2.0",
+    "moduleserve": "^0.9.0",
+    "wabby": "^1.0.6",
+    "webpack-cli": "^3.3.12"
+  }
+}

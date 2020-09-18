@@ -15,3 +15,16 @@ deps
 .rebar3
 _build/
 _checkouts/
+
+# apple
+.DS_Store
+
+# re-script
+.merlin
+.bsb.lock
+npm-debug.log
+/lib/bs/
+/node_modules/
+/bundleOutput/
+/src/**.*.bs.js
+/_esy

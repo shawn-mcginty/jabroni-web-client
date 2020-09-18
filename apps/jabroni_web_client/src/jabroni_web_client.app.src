@@ -1,0 +1,18 @@
+{application, jabroni_web_client,
+ [{description, "An OTP application"},
+  {vsn, "0.1.0"},
+  {registered, []},
+  {mod, {jabroni_web_client_app, []}},
+  {applications,
+   [kernel,
+    stdlib,
+    cowboy,
+    pgapp,
+    bcrypt
+   ]},
+  {env,[]},
+  {modules, []},
+
+  {licenses, ["MIT"]},
+  {links, []}
+ ]}.

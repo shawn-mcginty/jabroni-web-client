@@ -1,0 +1,3 @@
+-module(monads).
+-export_type([option/1]).
+-type option(A):: none | {some, A}.
