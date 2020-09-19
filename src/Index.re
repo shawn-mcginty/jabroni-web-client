@@ -1,7 +1,7 @@
 [%%raw{|require('./styles/main.css');|}];
 
 let wsProto = switch(Location.protocol()) {
-	| "https" => "wss"
+	| "https:" => "wss"
 	| _ => "ws"
 };
 
