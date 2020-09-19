@@ -26,5 +26,5 @@ npm-debug.log
 /lib/bs/
 /node_modules/
 /bundleOutput/
-/src/**.*.bs.js
+/src/*.bs.js
 /_esy
