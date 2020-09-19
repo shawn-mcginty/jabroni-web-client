@@ -32,7 +32,8 @@ migrate() ->
 			INSERT INTO invitations (invited_email, invited_by_user_id, created_on)
 			VALUES ('mcginty.shawn@gmail.com', 1, NOW()),
 			('jshirley1990@gmail.com', 1, NOW()),
-			('shuckwitbrian@gmail.com', 1, NOW())
+			('shukwitbrian@gmail.com', 1, NOW()),
+			('matthew.taylor000@gmail.com', 1, NOW())
 		"),
 		{ok, _, _} = pgapp:squery("
 			CREATE TABLE sessions (
