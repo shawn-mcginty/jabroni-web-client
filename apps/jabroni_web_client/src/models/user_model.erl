@@ -29,7 +29,7 @@ hash_pdub(Pdub) ->
 
 row_to_user_model(Row) ->
 	{Id, Email, Handle, Display, PwHash, CreatedOn} = Row,
-	#user{id=list_to_integer(binary_to_list(Id)), display=Display, handle=Handle, email=Email, created_on=CreatedOn, pw_hash=PwHash}.
+	#user{id=Id, display=Display, handle=Handle, email=Email, created_on=CreatedOn, pw_hash=PwHash}.
 
 to_user_model(Rows) ->
 	case length(Rows) of
