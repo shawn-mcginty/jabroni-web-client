@@ -3,6 +3,7 @@
 [@react.component]
 let make = (~ws, ~isConnected) => {
 	let chatPlaceholder = "Message #general...";
+	let (shiftCount, setShiftCount) = React.useState(() => 0);
 	let (currentMessage, setCurrentMessage) = React.useState(() => "");
 	let (chatMessages, setChatMessages) = React.useState(() => [||]);
 	let (currentUser, setCurrentUser) = React.useState(() => None);
@@ -46,6 +47,14 @@ let make = (~ws, ~isConnected) => {
 			|> Js.Promise.catch(e => Js.Console.error(e) |> Js.Promise.resolve);
 		None;
 	});
+
+	let sendMessage = () => {
+		switch (currentUser) {
+		| Some(u) => WebSocketBus.emit("chat_msg", u, currentMessage, ws)
+		| None => Js.Console.error("No current user... someting isn't right. Can not send message.");
+		}
+		setCurrentMessage(_ => "");
+	};
 	<div className="h-full flex flex-col">
 		<div className="flex-grow min-h-0 overflow-auto pl-4">{
 			switch (Array.length(chatMessages)) {
@@ -57,25 +66,34 @@ let make = (~ws, ~isConnected) => {
 		</div>
 		<div className="p-4">
 			<div className="border-gray-700 rounded flex p-2 border">
-				<input
-					type_="text"
+				<div
+					contentEditable=true
 					className="flex-grow focus:outline-none"
-					placeholder={chatPlaceholder}
-					onChange={(e) => {
-						let txt = ReactEvent.Form.currentTarget(e)##value;
+					tabIndex=0
+					onInput={(e) => {
+						Js.Console.log(ReactEvent.Form.currentTarget(e)##text);
+						let txt = ReactEvent.Form.currentTarget(e)##text;
 						setCurrentMessage(_ => txt);
 					}}
-					value={currentMessage}
-				/>
+					onKeyDown={(e) => {
+						switch((ReactEvent.Keyboard.which(e), shiftCount)) {
+							| (13, 0) => sendMessage()// enter pressed, and shift not held
+							| (16, _) => setShiftCount(count => count + 1)
+							| _ => ()
+						}
+					}}
+					onKeyUp={(e) => {
+						switch((ReactEvent.Keyboard.which(e), shiftCount)) {
+							| (16, _) => setShiftCount(count => count - 1)
+							| _ => ()
+						}
+					}}
+				>
+					// <p className="text-gray-700">{React.string(chatPlaceholder)}</p>
+				</div>
 				<button
 					type_="button"
-					onClick={_ => {
-						switch (currentUser) {
-							| Some(u) => WebSocketBus.emit("chat_msg", u, currentMessage, ws)
-							| None => Js.Console.error("No current user... someting isn't right. Can not send message.");
-						}
-						setCurrentMessage(_ => "");
-					}}
+					onClick={_ => sendMessage()}
 					disabled={!isConnected}
 				>
 					{React.string("Send")}
