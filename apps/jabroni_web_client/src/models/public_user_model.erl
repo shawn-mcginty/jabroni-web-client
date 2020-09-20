@@ -19,9 +19,9 @@ of_user(User) ->
 
 -spec(of_user(User::user_model:user(), CurrentUserId::number()) -> public_user()).
 of_user(User, CurrentUserId) ->
-	IsCurrentUser = binary_to_integer(user_model:id(User)) == CurrentUserId,
+	IsCurrentUser = user_model:id(User) == CurrentUserId,
 	NewUser = #public_user{
-		id=binary_to_integer(user_model:id(User)),
+		id=user_model:id(User),
 		display=user_model:display(User),
 		handle=user_model:handle(User),
 		is_current_user=IsCurrentUser

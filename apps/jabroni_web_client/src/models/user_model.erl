@@ -72,6 +72,6 @@ verify_pdub(Pdub, Hash) ->
 
 -spec(find_all() -> {ok, list(user())}).
 find_all() ->
-	{ok, _Cols, Rows} = pgapp:squery("select " ++ ?USER_COLUMNS ++ " from users"),
+	{ok, _Cols, Rows} = pgapp:equery("select " ++ ?USER_COLUMNS ++ " from users", []),
 	Users = lists:map(fun (R) -> row_to_user_model(R) end, Rows),
 	{ok, Users}.
